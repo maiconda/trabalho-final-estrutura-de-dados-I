@@ -11,7 +11,6 @@ typedef struct No {
     struct No *proximo;
     struct No *anterior;
 } No;
-
 typedef struct TabelaHash {
     No *slots[TAMANHO_TABELA];
 } TabelaHash;
@@ -25,11 +24,17 @@ void excluirDaTabela(TabelaHash *tabela);
 void imprimirTabelaHash(TabelaHash *tabela);
 void buscarNaTabela(TabelaHash *tabela);
 void exibirMenu();
+void trocarPalavras(No *a, No *b);
+No *particionar(No *inicio, No *fim);
+void quickSort(No *inicio, No *fim);
+void sortSlot(TabelaHash *tabela, int indiceSlot);
+void sortTabela(TabelaHash *tabela);
+void imprimirSlot(TabelaHash *tabela);
 
 int main() {
     TabelaHash minhaTabela;
     inicializarTabelaHash(&minhaTabela);
-    insercaoInicial(&minhaTabela);
+    //insercaoInicial(&minhaTabela);
 
     int opcao;
     do {
@@ -55,13 +60,17 @@ int main() {
                 break;
 
             case 5:
+                imprimirSlot(&minhaTabela);
+                break;
+
+            case 6:
                 printf("Saindo do programa.\n");
                 break;
 
             default:
                 printf("Opção inválida. Tente novamente.\n");
         }
-    } while (opcao != 5);
+    } while (opcao != 6);
     return 0;
 }
 
@@ -128,6 +137,8 @@ void insercaoInicial(TabelaHash *tabela) {
     }
 
     fclose(fptr);
+
+    sortTabela(tabela);
 }
 
 void insercaoPalavras(TabelaHash *tabela) {
@@ -156,6 +167,7 @@ void insercaoPalavras(TabelaHash *tabela) {
 
     for (int i = 0; i < tamanho; i++) {
         inserirFunction(tabela, palavras[i]);
+        sortSlot(tabela, hash(palavras[i]));
     }
 
     printf("Palavras adicionadas!\n");
@@ -258,5 +270,79 @@ void exibirMenu() {
     printf("2. Excluir palavra\n");
     printf("3. Imprimir tabela\n");
     printf("4. Buscar na tabela\n");
-    printf("5. Sair\n");
+    printf("5. Imprimir slot da tabela\n");
+    printf("6. Sair\n");
+}
+
+void trocarPalavras(No *a, No *b) {
+    char *temp = a->palavra;
+    a->palavra = b->palavra;
+    b->palavra = temp;
+}
+
+No *particionar(No *inicio, No *fim) {
+    char *pivo = fim->palavra;
+    No *i = inicio->anterior;
+
+    for (No *j = inicio; j != fim; j = j->proximo) {
+        if (strcmp(j->palavra, pivo) < 0) {
+            i = (i == NULL) ? inicio : i->proximo;
+            trocarPalavras(i, j);
+        }
+    }
+
+    i = (i == NULL) ? inicio : i->proximo;
+    trocarPalavras(i, fim);
+
+    return i;
+}
+
+void quickSort(No *inicio, No *fim) {
+    if (fim != NULL && inicio != fim && inicio != fim->proximo) {
+        No *pivo = particionar(inicio, fim);
+        quickSort(inicio, pivo->anterior);
+        quickSort(pivo->proximo, fim);
+    }
+}
+
+void sortSlot(TabelaHash *tabela, int indiceSlot) {
+    No **slot = &(tabela->slots[indiceSlot]);
+
+    No *fim = *slot;
+    while (fim != NULL && fim->proximo != NULL) {
+        fim = fim->proximo;
+    }
+
+    quickSort(*slot, fim);
+}
+
+void sortTabela(TabelaHash *tabela) {
+    for (int i = 0; i < TAMANHO_TABELA; i++) {
+        sortSlot(tabela, i);
+    }
+}
+
+void imprimirSlot(TabelaHash *tabela) {
+    int indiceSlot;
+
+    printf("\nDigite qual slot deseja imprimir: ");
+    scanf("%d", &indiceSlot);
+
+    if (indiceSlot < 0 || indiceSlot >= TAMANHO_TABELA) {
+        printf("Índice de slot inválido.\n");
+        return;
+    }
+
+    No *atual = tabela->slots[indiceSlot];
+
+    printf("Palavras no slot %d:\n", indiceSlot);
+
+    if(atual ==  NULL){
+        printf("Nenhuma palavra encontrada.\n");
+    } else {
+        while (atual != NULL) {
+            printf("%s\n", atual->palavra);
+            atual = atual->proximo;
+        }
+    }
 }
