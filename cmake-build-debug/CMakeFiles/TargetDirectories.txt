@@ -1,0 +1,3 @@
+/home/maiconda/CLionProjects/estruturadedados/cmake-build-debug/CMakeFiles/estruturadedados.dir
+/home/maiconda/CLionProjects/estruturadedados/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/maiconda/CLionProjects/estruturadedados/cmake-build-debug/CMakeFiles/rebuild_cache.dir

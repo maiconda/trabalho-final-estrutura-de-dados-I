@@ -1,0 +1,27 @@
+# ninja log v5
+0	12	1700365966687468944	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+12	24	1700365966699469509	estruturadedados	c2408a1cbbf92792
+0	20	1700366452851540874	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+20	32	1700366452863541148	estruturadedados	c2408a1cbbf92792
+0	19	1700366465363823347	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+19	30	1700366465375823616	estruturadedados	c2408a1cbbf92792
+0	20	1700367198311080271	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+20	32	1700367198323080404	estruturadedados	c2408a1cbbf92792
+0	20	1700367337352543029	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+20	31	1700367337364543151	estruturadedados	c2408a1cbbf92792
+0	20	1700367615003178125	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+20	32	1700367615015178232	estruturadedados	c2408a1cbbf92792
+0	20	1700367697247905965	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+20	31	1700367697259906070	estruturadedados	c2408a1cbbf92792
+1	20	1700367748796352849	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+21	33	1700367748808352953	estruturadedados	c2408a1cbbf92792
+0	21	1700367856677268297	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+21	34	1700367856689268397	estruturadedados	c2408a1cbbf92792
+1	24	1700368385413498879	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+24	37	1700368385425498972	estruturadedados	c2408a1cbbf92792
+0	22	1700368405181651689	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+22	33	1700368405189651751	estruturadedados	c2408a1cbbf92792
+0	21	1700368446093967136	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+22	33	1700368446105967228	estruturadedados	c2408a1cbbf92792
+0	22	1700368474090182401	CMakeFiles/estruturadedados.dir/main.c.o	660cc908f35a0e2c
+22	33	1700368474102182494	estruturadedados	c2408a1cbbf92792
