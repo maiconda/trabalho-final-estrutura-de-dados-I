@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <math.h>
 
 #define TAMANHO_TABELA 53
 #define TAMANHO_PALAVRA 50
@@ -30,11 +31,12 @@ void quickSort(No *inicio, No *fim);
 void sortSlot(TabelaHash *tabela, int indiceSlot);
 void sortTabela(TabelaHash *tabela);
 void imprimirSlot(TabelaHash *tabela);
+void mediaDesvioPadrao(TabelaHash *tabela);
 
 int main() {
     TabelaHash minhaTabela;
     inicializarTabelaHash(&minhaTabela);
-    //insercaoInicial(&minhaTabela);
+    insercaoInicial(&minhaTabela);
 
     int opcao;
     do {
@@ -64,13 +66,17 @@ int main() {
                 break;
 
             case 6:
+                mediaDesvioPadrao(&minhaTabela);
+                break;
+
+            case 7:
                 printf("Saindo do programa.\n");
                 break;
 
             default:
                 printf("Opção inválida. Tente novamente.\n");
         }
-    } while (opcao != 6);
+    } while (opcao != 7);
     return 0;
 }
 
@@ -271,7 +277,8 @@ void exibirMenu() {
     printf("3. Imprimir tabela\n");
     printf("4. Buscar na tabela\n");
     printf("5. Imprimir slot da tabela\n");
-    printf("6. Sair\n");
+    printf("6. Imprimir média e desvio padrão\n");
+    printf("7. Sair\n");
 }
 
 void trocarPalavras(No *a, No *b) {
@@ -345,4 +352,35 @@ void imprimirSlot(TabelaHash *tabela) {
             atual = atual->proximo;
         }
     }
+}
+
+void mediaDesvioPadrao(TabelaHash *tabela){
+
+    float media = 0;
+
+    for (int i = 0; i < TAMANHO_TABELA; i++) {
+        int contador = 0;
+        No *atual = tabela->slots[i];
+        while (atual != NULL) {
+            contador++;
+            atual = atual->proximo;
+        }
+        media += contador;
+    }
+    media = media / TAMANHO_TABELA;
+    printf("\nMédia: %.2f\n", media);
+
+    float desvioPadrao = 0;
+
+    for (int i = 0; i < TAMANHO_TABELA; i++) {
+        int contador = 0;
+        No *atual = tabela->slots[i];
+        while (atual != NULL) {
+            contador++;
+            atual = atual->proximo;
+        }
+        desvioPadrao += fabs(media - contador);
+    }
+    desvioPadrao = desvioPadrao / TAMANHO_TABELA;
+    printf("Desvio padrão: %.2f\n", desvioPadrao);
 }
